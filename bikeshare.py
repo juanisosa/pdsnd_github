@@ -20,7 +20,7 @@ def get_filters():
     while True:
         try:
             city = input('\nPlease select one of the following cities to see bikeshare data: Chicago, New York City or Washington: ').lower()
-            if city in ['chicago', 'new york city', 'washington']: #checking that the city
+            if city in CITY_DATA.keys(): #checking that the city
                 break
         except KeyboardInterrupt: #To allow terminating the program during input
             print('\n')
