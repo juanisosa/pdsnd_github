@@ -36,7 +36,9 @@ def get_filters():
     while True:
         try:
             month = input('\nFor which month between January and June would you like to filter the data? Please type \'all\' to not apply a filter:  ').lower()
-            if month in ['january', 'february', 'march', 'april', 'may', 'june', 'all']:
+            if month in MONTHS:
+                break
+            elif month == 'all':
                 break
         except KeyboardInterrupt:
             print('\n')
@@ -86,8 +88,7 @@ def load_data(city, month, day):
     # filter by month if applicable
     if month != 'all':
         # use the index of the months list to get the corresponding int
-        months = ['january', 'february', 'march', 'april', 'may', 'june']
-        month = months.index(month) + 1
+        month = MONTHS.index(month) + 1
 
         # filter by month to create the new dataframe
         df = df[df['month'] == month]
@@ -110,9 +111,8 @@ def time_stats(df, month, day):
 
     if month == 'all':
         #deterine most common month and convert from integer (1,...,6) into named month.
-        months = ['january', 'february', 'march', 'april', 'may', 'june']
         #using grouby, size and idxmax to get the index with the highest value
-        most_common_month = months[df.groupby(['month']).size().idxmax() - 1]
+        most_common_month = MONTHS[df.groupby(['month']).size().idxmax() - 1]
 
         print('The month with the most rides was: {}\n'.format(most_common_month.title()))
 
