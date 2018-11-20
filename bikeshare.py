@@ -217,16 +217,20 @@ def raw_data(df):
 def main():
     while True:
         city, month, day = get_filters()
+        #print summary of filters selected by user
         print('\nYou chose to analyze data {}, {}, {}'.format(city.title(), month.title(), day.title()))
         df = load_data(city, month, day)
         time_stats(df, month, day)
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df, city)
+        #function to print raw data sample as per rubric
         raw_data(df)
+
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
+            #added message to restart condition
             print('\nThank you and have a nice day!\n')
             break
 
